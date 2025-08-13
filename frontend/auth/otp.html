@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực OTP - AI Tư vấn Pháp luật</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <i class="fas fa-balance-scale"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <h2 class="auth-title">Xác thực tài khoản của bạn</h2>
+            <p class="auth-subtitle">Mã OTP đã được gửi đến email của bạn. Vui lòng nhập mã vào bên dưới.</p>
+            
+            <form id="otp-form">
+                <div class="input-group">
+                    <label for="otp"><i class="fas fa-shield-alt"></i></label>
+                    <input type="text" id="otp" placeholder="Nhập mã OTP" required>
+                </div>
+                
+                <button type="submit" class="auth-btn">Xác nhận</button>
+            </form>
+            
+            <div class="switch-auth">
+                <p>Chưa nhận được mã? <a href="#">Gửi lại mã</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

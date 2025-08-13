@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng công nghệ số cho công tác tuyên truyền phổ biến giáo dục pháp luật - Công an Xã Quảng Phú</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Banner Section -->
+    <section class="banner-section">
+        <div class="banner-container">
+            <img src="img/462cd135-bd9f-4974-8ee2-75df5c2d3e57.jpg.avif" alt="Banner Công an Xã Quảng Phú" class="banner-image">
+            <div class="banner-overlay">
+                <h1 class="banner-slogan">Hiểu luật để sống đúng - Giữ buôn làng yên</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="#" class="nav-link">Tin tức</a>
+                    <a href="../ai-chat/index.html" class="nav-link">Hỏi đáp AI</a>
+                    <a href="#" class="nav-link">Video</a>
+                    <a href="#" class="nav-link">Văn bản</a>
+                    <a href="#" class="nav-link">Góp ý</a>
+                    <div class="nav-auth mobile-auth">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                </div>
+                <div class="nav-auth-container">
+                    <!-- Buttons shown when user is logged out -->
+                    <div class="nav-auth desktop-auth" id="auth-buttons">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                    <!-- Profile menu shown when user is logged in -->
+                    <div class="profile-menu" id="profile-menu" style="display: none;">
+                        <button class="profile-toggle" onclick="toggleProfileMenu()">
+                            <img src="https://via.placeholder.com/40" alt="User Avatar" class="profile-avatar">
+                        </button>
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="#" class="dropdown-item"><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-button" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="main-layout">
+            <!-- Left Column - Main Content -->
+            <div class="main-column">
+                <!-- Featured Slider -->
+                <section class="slider-section">
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <div class="slide active">
+                                <img src="" alt="Slide 1" class="slide-image">
+                                <div class="slide-overlay">
+                                    <div class="slide-content">
+                                        <h2>Tuyên truyền pháp luật đến từng hộ gia đình</h2>
+                                        <p>Đưa kiến thức pháp luật đến gần hơn với đồng bào dân tộc thiểu số</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/banner-ngay-phap-luat-viet-nam-6.webp" alt="Slide 2" class="slide-image">
+                                <div class="slide-overlay">
+                                    <div class="slide-content">
+                                        <h2>Ứng dụng công nghệ số hiện đại</h2>
+                                        <p>Nâng cao hiệu quả công tác tuyên truyền giáo dục pháp luật</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <img src="img/subiz-ung-dung-cong-nghe-so-trong-doanh-nghiep-5.webp" alt="Slide 3" class="slide-image">
+                                <div class="slide-overlay">
+                                    <div class="slide-content">
+                                        <h2>Xây dựng cộng đồng văn minh, pháp luật</h2>
+                                        <p>Góp phần giữ gìn an ninh trật tự tại địa phương</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Slider Navigation -->
+                        <div class="slider-nav">
+                            <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-btn next-btn" onclick="changeSlide(1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Slider Dots -->
+                        <div class="slider-dots">
+                            <span class="dot active" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Latest News Section -->
+                <section class="latest-news">
+                    <div class="section-header">
+                        <h2><i class="fas fa-newspaper"></i> Tin tức mới nhất</h2>
+                        <a href="#" class="view-all">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="news-grid">
+                        <article class="news-card featured">
+                            <div class="news-image">
+                                <img src="" alt="Tin tức nổi bật">
+                                <div class="news-category">Nổi bật</div>
+                            </div>
+                            <div class="news-content">
+                                <h3>Triển khai ứng dụng công nghệ số trong tuyên truyền pháp luật</h3>
+                                <p>Công an Xã Quảng Phú đã triển khai thành công ứng dụng công nghệ số để nâng cao hiệu quả...</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> 15/12/2024</span>
+                                    <span><i class="fas fa-eye"></i> 1,234 lượt xem</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-image">
+                                <img src="" alt="Tin tức">
+                                <div class="news-category">Pháp luật</div>
+                            </div>
+                            <div class="news-content">
+                                <h3>Hướng dẫn các quy định mới về an toàn giao thông</h3>
+                                <p>Những điều cần biết về Luật Giao thông đường bộ mới có hiệu lực...</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> 14/12/2024</span>
+                                    <span><i class="fas fa-eye"></i> 856 lượt xem</span>
+                                </div>
+                            </div>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-image">
+                                <img src="" alt="Tin tức">
+                                <div class="news-category">Giáo dục</div>
+                            </div>
+                            <div class="news-content">
+                                <h3>Lớp tập huấn pháp luật cho cán bộ thôn bản</h3>
+                                <p>Nâng cao nhận thức pháp luật cho đội ngũ cán bộ cơ sở...</p>
+                                <div class="news-meta">
+                                    <span><i class="fas fa-calendar"></i> 13/12/2024</span>
+                                    <span><i class="fas fa-eye"></i> 642 lượt xem</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column - Sidebar -->
+            <div class="sidebar">
+                <!-- Quick Links -->
+                <div class="widget">
+                    <h3 class="widget-title"><i class="fas fa-link"></i> Liên kết nhanh</h3>
+                    <div class="quick-links">
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-gavel"></i>
+                            <span>Văn bản pháp luật</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Hỏi đáp pháp luật</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-video"></i>
+                            <span>Video tuyên truyền</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <i class="fas fa-phone"></i>
+                            <span>Liên hệ tư vấn</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Popular Articles -->
+                <div class="widget">
+                    <h3 class="widget-title"><i class="fas fa-fire"></i> Bài viết phổ biến</h3>
+                    <div class="popular-articles">
+                        <article class="popular-item">
+                            <div class="popular-image">
+                                <img src="" alt="Bài viết phổ biến">
+                            </div>
+                            <div class="popular-content">
+                                <h4>10 điều cần biết về Luật An ninh mạng</h4>
+                                <span class="popular-views"><i class="fas fa-eye"></i> 2,345 lượt xem</span>
+                            </div>
+                        </article>
+                        
+                        <article class="popular-item">
+                            <div class="popular-image">
+                                <img src="" alt="Bài viết phổ biến">
+                            </div>
+                            <div class="popular-content">
+                                <h4>Quyền và nghĩa vụ của công dân</h4>
+                                <span class="popular-views"><i class="fas fa-eye"></i> 1,987 lượt xem</span>
+                            </div>
+                        </article>
+                        
+                        <article class="popular-item">
+                            <div class="popular-image">
+                                <img src="" alt="Bài viết phổ biến">
+                            </div>
+                            <div class="popular-content">
+                                <h4>Hướng dẫn giải quyết tranh chấp dân sự</h4>
+                                <span class="popular-views"><i class="fas fa-eye"></i> 1,654 lượt xem</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="widget">
+                    <h3 class="widget-title"><i class="fas fa-chart-bar"></i> Thống kê</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">1,234</div>
+                            <div class="stat-label">Lượt truy cập hôm nay</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">45,678</div>
+                            <div class="stat-label">Tổng lượt truy cập</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Bài viết</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Video</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="widget contact-widget">
+                    <h3 class="widget-title"><i class="fas fa-phone-alt"></i> Liên hệ</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Công an Xã Quảng Phú</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>0123.456.789</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>caquangphu@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Liên hệ với chúng tôi</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Công an Xã Quảng Phú</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>Hotline: 0123.456.789</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: caquangphu@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kết nối với chúng tôi</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" class="social-link zalo">
+                            <i class="fas fa-comments"></i>
+                            <span>Zalo</span>
+                        </a>
+                        <a href="#" class="social-link gmail">
+                            <i class="fas fa-envelope"></i>
+                            <span>Gmail</span>
+                        </a>
+                        <a href="#" class="social-link youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Thông tin</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Công an Xã Quảng Phú. Tất cả quyền được bảo lưu.</p>
+                <p>Ứng dụng công nghệ số cho công tác tuyên truyền phổ biến giáo dục pháp luật</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
