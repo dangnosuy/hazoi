@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /.git/
+Disallow: /admin/
+Disallow: /*.md
+Disallow: /README*
+
+# Cho phép truy cập các trang chính
+Allow: /main/
+Allow: /ai-chat/
+Allow: /auth/
+Allow: /feedback/
+Allow: /profile/
+Allow: /quiz/
+
+Sitemap: /sitemap.xml
