@@ -20,7 +20,7 @@ CREATE TABLE USERS (
 CREATE TABLE WHITELIST (
     id INT AUTO_INCREMENT PRIMARY KEY,
     jti VARCHAR(64),
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
 
@@ -107,6 +107,7 @@ CREATE TABLE OTP (
     birthday DATE NOT NULL,
     education_level VARCHAR(100) NOT NULL,
     location VARCHAR(255),
+    role VARCHAR(10),
     hashed_password VARCHAR(255) NOT NULL,
     token VARCHAR(64) NOT NULL,
     otp INT NOT NULL,
