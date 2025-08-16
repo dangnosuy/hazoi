@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Bài Học | Công an Xã Quảng Phú</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section with Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../main/index.html" class="nav-link">Trang chủ</a>
+                    <a href="#" class="nav-link">Tin tức</a>
+                    <a href="../ai-chat/index.html" class="nav-link">Hỏi đáp AI</a>
+                    <a href="#" class="nav-link active">Video</a>
+                    <a href="#" class="nav-link">Văn bản</a>
+                    <a href="../feedback/" class="nav-link">Góp ý</a>
+                    <div class="nav-auth mobile-auth">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                </div>
+                <div class="nav-auth-container">
+                    <!-- Buttons shown when user is logged out -->
+                    <div class="nav-auth desktop-auth" id="auth-buttons">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                    <!-- Profile menu shown when user is logged in -->
+                    <div class="profile-menu" id="profile-menu" style="display: none;">
+                        <button class="profile-toggle" onclick="toggleProfileMenu()">
+                            <img src="https://via.placeholder.com/40" alt="User Avatar" class="profile-avatar">
+                        </button>
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="../profile/" class="dropdown-item"><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-button" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Video List View (Default) -->
+            <div class="video-list-container" id="video-list-view">
+                <div class="page-header">
+                    <h1><i class="fas fa-video"></i> Video Bài Học Pháp Luật</h1>
+                    <p>Xem video bài giảng và làm bài kiểm tra để củng cố kiến thức pháp luật Việt Nam</p>
+                </div>
+                
+                <div class="video-list" id="video-list">
+                    <div class="loading-placeholder">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Đang tải danh sách video bài học...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Player Layout -->
+            <div class="video-player-layout" id="video-player-layout">
+                <div class="video-main-section">
+                    <!-- Video Player -->
+                    <div class="video-player">
+                        <iframe id="main-video" 
+                                src="" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    
+                    <!-- Video Info -->
+                    <div class="video-info-section">
+                        <h1 class="current-video-title" id="current-video-title">Tên bài học</h1>
+                        <div class="current-video-meta">
+                            <span><i class="fas fa-clock"></i> <span id="current-video-duration">10:30</span></span>
+                            <span><i class="fas fa-tag"></i> <span id="current-video-topic">Pháp luật cơ bản</span></span>
+                        </div>
+                        
+                        <!-- Quiz Section -->
+                        <div class="quiz-section">
+                            <h3><i class="fas fa-question-circle"></i> Kiểm tra kiến thức</h3>
+                            <p>Hoàn thành bài kiểm tra để đánh giá mức độ hiểu bài của bạn</p>
+                            <button class="start-quiz-btn" onclick="startQuiz()">
+                                <i class="fas fa-play"></i> Bắt đầu kiểm tra
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Sidebar -->
+                <div class="video-sidebar">
+                    <h3 class="sidebar-title">Các bài học khác</h3>
+                    <div class="sidebar-video-list" id="sidebar-video-list">
+                        <!-- Sidebar videos will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen" id="quiz-screen" style="display: none;">
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <h2 class="quiz-title" id="quiz-title">Bài kiểm tra pháp luật</h2>
+                        <div class="quiz-progress">
+                            <span id="question-counter">Câu 1/10</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quiz-timer">
+                        <div class="timer-circle">
+                            <svg class="timer-svg" viewBox="0 0 100 100">
+                                <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="timer-progress" cx="50" cy="50" r="45" id="timer-circle"></circle>
+                            </svg>
+                            <div class="timer-text" id="timer-text">30</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Content -->
+                <div class="question-container">
+                    <div class="question-card">
+                        <div class="question-text" id="question-text">
+                            Đang tải câu hỏi...
+                        </div>
+                        <div class="answers-grid" id="answers-grid">
+                            <!-- Answers will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Controls -->
+                <div class="quiz-controls">
+                    <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
+                        <i class="fas fa-chevron-left"></i> Câu trước
+                    </button>
+                    <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>
+                        Câu tiếp <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="btn btn-success" id="submit-btn" onclick="submitQuiz()" style="display: none;">
+                        <i class="fas fa-check"></i> Nộp bài
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="results-screen" id="results-screen" style="display: none;">
+                <div class="results-header">
+                    <div class="results-icon">
+                        <i class="fas fa-trophy" id="results-icon"></i>
+                    </div>
+                    <h2>Kết quả bài làm</h2>
+                    <div class="score-display">
+                        <span class="score-text">Điểm số của bạn:</span>
+                        <span class="score-number" id="final-score">0</span>
+                        <span class="score-total">/100</span>
+                    </div>
+                </div>
+
+                <div class="results-details">
+                    <div class="results-stats">
+                        <div class="stat-item correct">
+                            <i class="fas fa-check"></i>
+                            <span>Đúng: <strong id="correct-count">0</strong></span>
+                        </div>
+                        <div class="stat-item incorrect">
+                            <i class="fas fa-times"></i>
+                            <span>Sai: <strong id="incorrect-count">0</strong></span>
+                        </div>
+                        <div class="stat-item total">
+                            <i class="fas fa-list"></i>
+                            <span>Tổng: <strong id="total-count">0</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="answers-review" id="answers-review">
+                        <!-- Detailed answers review will be shown here -->
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="goBackToVideo()">
+                        <i class="fas fa-video"></i> Xem lại video
+                    </button>
+                    <button class="btn btn-secondary" onclick="retryQuiz()">
+                        <i class="fas fa-redo"></i> Làm lại bài này
+                    </button>
+                    <button class="btn btn-info" onclick="goBackToList()">
+                        <i class="fas fa-list"></i> Chọn bài khác
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Đang xử lý...</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

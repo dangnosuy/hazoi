@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Lesson Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn-success {
+            background: #28a745;
+        }
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .lesson-item {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .lesson-header {
+            background: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+        .lesson-header:hover {
+            background: #e9ecef;
+        }
+        .lesson-content {
+            padding: 15px;
+            display: none;
+        }
+        .lesson-content.show {
+            display: block;
+        }
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            display: none;
+            z-index: 2000;
+        }
+        #notification.success {
+            background: #28a745;
+        }
+        #notification.error {
+            background: #dc3545;
+        }
+        #notification.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Lesson Management</h1>
+        
+        <div style="margin-bottom: 20px;">
+            <button class="btn" onclick="testAlert()">Test Alert</button>
+            <button class="btn" onclick="openModal('testModal')">Test Modal</button>
+            <button class="btn btn-success" onclick="loadLessons()">Load Lessons</button>
+            <button class="btn" onclick="showNotification('Test notification', 'success')">Test Notification</button>
+        </div>
+
+        <div id="lessons-container">
+            <p>Click "Load Lessons" để test API</p>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div id="testModal" class="modal">
+        <div class="modal-content">
+            <h3>Test Modal</h3>
+            <p>Modal hoạt động bình thường!</p>
+            <button class="btn" onclick="closeModal('testModal')">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification"></div>
+
+    <script>
+        console.log('JavaScript loaded successfully!');
+
+        function testAlert() {
+            alert('Button click hoạt động!');
+        }
+
+        function openModal(modalId) {
+            console.log('Opening modal:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('show');
+                console.log('Modal opened');
+            } else {
+                console.log('Modal not found');
+            }
+        }
+
+        function closeModal(modalId) {
+            console.log('Closing modal:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        function showNotification(message, type) {
+            console.log('Showing notification:', message, type);
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `${type} show`;
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        async function loadLessons() {
+            console.log('Loading lessons...');
+            const container = document.getElementById('lessons-container');
+            
+            container.innerHTML = '<p>Đang tải...</p>';
+            
+            try {
+                const token = localStorage.getItem('authToken');
+                console.log('Auth token:', token ? 'Found' : 'Not found');
+                
+                if (!token) {
+                    container.innerHTML = '<p style="color: red;">Không có token đăng nhập. Vui lòng đăng nhập trước.</p>';
+                    return;
+                }
+
+                const response = await fetch('http://localhost:5001/api/video-game/get-lesson-video', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('Response status:', response.status);
+                
+                const data = await response.json();
+                console.log('Response data:', data);
+
+                if (data.success) {
+                    const lessons = data.lesson || [];
+                    console.log('Lessons count:', lessons.length);
+                    
+                    if (lessons.length === 0) {
+                        container.innerHTML = '<p>Không có bài học nào.</p>';
+                    } else {
+                        container.innerHTML = lessons.map((lesson, index) => `
+                            <div class="lesson-item">
+                                <div class="lesson-header" onclick="toggleLesson(${index})">
+                                    <strong>${lesson.name || 'Không có tên'}</strong> - ${lesson.topic || 'Không có chủ đề'}
+                                </div>
+                                <div class="lesson-content" id="lesson-${index}">
+                                    <p><strong>Token:</strong> ${lesson.token || 'N/A'}</p>
+                                    <p><strong>Video:</strong> ${lesson.url_video ? 'Có' : 'Chưa có'}</p>
+                                    ${lesson.url_video ? `<p><a href="${lesson.url_video}" target="_blank">Xem video</a></p>` : ''}
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                    
+                    showNotification(`Tải thành công ${lessons.length} bài học`, 'success');
+                } else {
+                    container.innerHTML = `<p style="color: red;">Lỗi: ${data.message}</p>`;
+                    showNotification(data.message, 'error');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                container.innerHTML = `<p style="color: red;">Lỗi kết nối: ${error.message}</p>`;
+                showNotification('Lỗi kết nối API', 'error');
+            }
+        }
+
+        function toggleLesson(index) {
+            console.log('Toggling lesson:', index);
+            const content = document.getElementById(`lesson-${index}`);
+            if (content) {
+                content.classList.toggle('show');
+            }
+        }
+
+        // Test khi trang load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, DOM ready');
+            showNotification('Trang test đã sẵn sàng!', 'success');
+        });
+    </script>
+</body>
+</html>
