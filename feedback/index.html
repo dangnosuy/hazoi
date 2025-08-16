@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góp ý - Tư vấn pháp luật | Công an Xã Quảng Phú</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../main/index.html" class="nav-link">Trang chủ</a>
+                    <a href="#" class="nav-link">Tin tức</a>
+                    <a href="../ai-chat/index.html" class="nav-link">Hỏi đáp AI</a>
+                    <a href="../quiz/" class="nav-link">Video</a>
+                    <a href="../feedback/" class="nav-link active">Góp ý</a>
+                    <div class="nav-auth mobile-auth">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                </div>
+                <div class="nav-auth-container">
+                    <!-- Buttons shown when user is logged out -->
+                    <div class="nav-auth desktop-auth" id="auth-buttons">
+                        <a href="../auth/register.html" class="auth-link">Đăng ký</a>
+                        <a href="../auth/login.html" class="auth-link login-btn">Đăng nhập</a>
+                    </div>
+                    <!-- Profile menu shown when user is logged in -->
+                    <div class="profile-menu" id="profile-menu" style="display: none;">
+                        <button class="profile-toggle" onclick="toggleProfileMenu()">
+                            <img src="../avatar.jpg" alt="User Avatar" class="profile-avatar">
+                        </button>
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="#" class="dropdown-item"><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-button" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Góp ý và Phản ánh</h1>
+                        <p>Chia sẻ ý kiến của bạn để cùng xây dựng cộng đồng tốt đẹp hơn</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="track.html" class="quick-action-btn">
+                        <i class="fas fa-search"></i>
+                        <span>Tra cứu phản ánh</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="feedback-container">
+                <form class="feedback-form" id="feedbackForm">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-user"></i>
+                            <h3>Thông tin cá nhân</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fullName">Họ và tên</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="fullName" name="fullName" placeholder="Nhập họ và tên của bạn">
+                                <div class="anonymous-option">
+                                    <input type="checkbox" id="anonymous" name="anonymous">
+                                    <label for="anonymous">Gửi ẩn danh</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="location">Thôn/buôn nơi sinh sống <span class="required-mark">*</span></label>
+                            <input type="text" id="location" name="location" placeholder="Nhập thôn/buôn nơi bạn sinh sống" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact">Số điện thoại/Email (nếu muốn phản hồi)</label>
+                            <input type="text" id="contact" name="contact" placeholder="Nhập số điện thoại hoặc email">
+                        </div>
+                    </div>
+
+                    <!-- Feedback Type Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-list-check"></i>
+                            <h3>Loại nội dung</h3>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="content-feedback" name="feedbackType" value="content-feedback">
+                                <label for="content-feedback">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-text">Góp ý nội dung tuyên truyền</span>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="violation-report" name="feedbackType" value="violation-report">
+                                <label for="violation-report">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-text">Phản ánh hành vi vi phạm pháp luật</span>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="new-method" name="feedbackType" value="new-method">
+                                <label for="new-method">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-text">Đề xuất hình thức tuyên truyền mới</span>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="other-suggestion" name="feedbackType" value="other-suggestion">
+                                <label for="other-suggestion">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="checkbox-text">Kiến nghị khác</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-edit"></i>
+                            <h3>Nội dung chi tiết</h3>
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label for="content">Mô tả chi tiết <span class="required-mark">*</span></label>
+                            <textarea id="content" name="content" rows="6" placeholder="Vui lòng mô tả chi tiết nội dung góp ý, phản ánh của bạn..." required></textarea>
+                            <div class="char-count">
+                                <span id="charCount">0</span>/2000 ký tự
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Upload Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="fas fa-paperclip"></i>
+                            <h3>Hình ảnh/Video minh chứng</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Kéo thả file vào đây hoặc <span class="upload-link">chọn file</span></p>
+                                    <small>Hỗ trợ: JPG, PNG, MP4, MOV (tối đa 10MB)</small>
+                                </div>
+                                <input type="file" id="fileInput" name="attachments" multiple accept="image/*,video/*" hidden>
+                            </div>
+                            <div class="file-list" id="fileList"></div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Section -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="resetForm()">
+                            <i class="fas fa-undo"></i>
+                            Làm mới
+                        </button>
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i>
+                            Gửi góp ý
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>Gửi thành công!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Cảm ơn bạn đã gửi góp ý. Chúng tôi sẽ xem xét và phản hồi sớm nhất có thể.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="closeModal()">Đóng</button>
+                <a href="track.html" class="btn-secondary">Tra cứu phản ánh</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <style>
+        .quick-actions {
+            margin-top: 1rem;
+        }
+        
+        .quick-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .quick-action-btn:hover {
+            background: #2563eb;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .modal-actions .btn-secondary {
+            background: #6b7280;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .modal-actions .btn-secondary:hover {
+            background: #4b5563;
+        }
+    </style>
+</body>
+</html>

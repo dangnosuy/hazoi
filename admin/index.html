@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AI Tư vấn Pháp luật</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="table-styles.css">
+    <link rel="stylesheet" href="detail-styles.css">
+    <link rel="stylesheet" href="dashboard-styles.css">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="../main/index.html" class="brand-link">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                    <a href="feedback-management.html" class="nav-link">
+                        <i class="fas fa-comments"></i>
+                        Quản lý Feedback
+                    </a>
+                    <a href="lesson-management.html" class="nav-link">
+                        <i class="fas fa-video"></i>
+                        Quản lý Bài học
+                    <a href="user-management.html" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        Quản lý Người dùng
+                    </a>
+                    </a>
+                </div>
+                <div class="nav-auth">
+                    <div class="profile-menu">
+                        <button class="profile-toggle" onclick="toggleProfileMenu()">
+                            <img src="../avatar.jpg" alt="Admin" class="profile-avatar">
+                        </button>
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                Thông tin cá nhân
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Cài đặt
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-content">
+                    <h1>
+                        <i class="fas fa-tachometer-alt"></i>
+                        Admin Dashboard
+                    </h1>
+                    <p>Tổng quan hệ thống AI Tư vấn Pháp luật</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="refreshDashboard()">
+                        <i class="fas fa-sync-alt"></i>
+                        Làm mới
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <div class="stat-label">Tổng người dùng</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon processing">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalFeedback">0</div>
+                        <div class="stat-label">Feedback mới</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon resolved">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalVideos">0</div>
+                        <div class="stat-label">Video đã upload</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon rejected">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" id="totalChats">0</div>
+                        <div class="stat-label">Cuộc trò chuyện AI</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2>
+                    <i class="fas fa-bolt"></i>
+                    Thao tác nhanh
+                </h2>
+                <div class="action-grid">
+                    <a href="feedback-management.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Quản lý Feedback</h3>
+                            <p>Xem và xử lý phản hồi từ người dùng</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <a href="lesson-management.html" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Quản lý Bài học</h3>
+                            <p>Tải lên video bài giảng pháp luật</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+
+                    <div class="action-card disabled">
+                        <div class="action-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Quản lý Users</h3>
+                            <p>Sắp ra mắt</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+
+                    <div class="action-card disabled">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="action-content">
+                            <h3>Thống kê</h3>
+                            <p>Sắp ra mắt</p>
+                        </div>
+                        <div class="action-arrow">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="recent-activities">
+                <div class="section-header">
+                    <h2>
+                        <i class="fas fa-clock"></i>
+                        Hoạt động gần đây
+                    </h2>
+                    <button class="btn btn-outline" onclick="loadRecentActivities()">
+                        <i class="fas fa-sync-alt"></i>
+                        Làm mới
+                    </button>
+                </div>
+                <div class="activities-list" id="activitiesList">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Người dùng mới đăng ký</div>
+                            <div class="activity-time">5 phút trước</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Feedback mới được gửi</div>
+                            <div class="activity-time">10 phút trước</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Cuộc trò chuyện AI mới</div>
+                            <div class="activity-time">15 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="system-status">
+                <h2>
+                    <i class="fas fa-server"></i>
+                    Trạng thái hệ thống
+                </h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <div class="status-info">
+                            <div class="status-name">API Server</div>
+                            <div class="status-value">Hoạt động bình thường</div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <div class="status-info">
+                            <div class="status-name">Database</div>
+                            <div class="status-value">Kết nối ổn định</div>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-indicator online"></div>
+                        <div class="status-info">
+                            <div class="status-name">AI Service</div>
+                            <div class="status-value">Sẵn sàng phục vụ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Dashboard specific functions
+        function refreshDashboard() {
+            loadDashboardStats();
+            loadRecentActivities();
+            showNotification('Đã làm mới dashboard', 'success');
+        }
+
+        function loadDashboardStats() {
+            // Mock data - replace with actual API calls
+            document.getElementById('totalUsers').textContent = '1,234';
+            document.getElementById('totalFeedback').textContent = '56';
+            document.getElementById('totalVideos').textContent = '23';
+            document.getElementById('totalChats').textContent = '789';
+        }
+
+        function loadRecentActivities() {
+            // This would load from API in real implementation
+            console.log('Loading recent activities...');
+        }
+
+        // Load dashboard data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardStats();
+        });
+    </script>
+</body>
+</html>
