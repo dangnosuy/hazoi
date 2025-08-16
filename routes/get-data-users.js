@@ -1,1 +1,0 @@
-// get data from users IP, User-agent, education level, location, age, ... -> To analyze this data for police
