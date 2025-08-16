@@ -14,6 +14,7 @@ const chatbotRoutes = require('./routes/chatbot');
 const videoGames = require('./routes/video-and-game');
 const userManagementRoutes = require('./routes/user-management');
 const feedbackRoutes = require('./routes/feedback');
+const userProfile = require('./routes/user-profile');
 
 // Sử dụng routes
 app.use('/api/auth', authRoutes);          // Ví dụ: /api/auth/login, /api/auth/register
@@ -22,6 +23,7 @@ app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/video-game', videoGames);
 app.use('/api/user-management', userManagementRoutes);  // Thêm route user management
 app.use('/api/feedback', feedbackRoutes);  // Thêm route feedback
+app.use('/api/profile', userProfile);  // Thêm route feedback
 
 //console.log('myRouter:', authRoutes)
 
